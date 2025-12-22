@@ -26,7 +26,7 @@ resource "azurerm_public_ip" "public_ip" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
-  sku                 = "Standard"
+  sku                 = "Basic"
 }
 
 
@@ -99,8 +99,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "ubuntu-24_04-lts"  # 24.04 LTS (Noble)
-    sku       = "server"            # Gen2, AMD64; use "server-gen1" se precisar Gen1
+    offer     = "ubuntu-24_04-lts"
+    sku       = "20_04-lts"
     version   = "latest"
   }
 }
