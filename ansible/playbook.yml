@@ -28,7 +28,7 @@
         apt-get update -y
         apt-get install -y ca-certificates curl gnupg lsb-release apt-transport-https
       args:
-        warn: false
+        executable: /bin/bash
 
     - name: Criar diretório de keyrings do APT
       ansible.builtin.file:
@@ -48,7 +48,7 @@
         gpg --dearmor < /tmp/docker.gpg > "{{ docker_keyring }}"
         chmod 0644 "{{ docker_keyring }}"
       args:
-        warn: false
+        executable: /bin/bash
 
     - name: Adicionar repositório oficial do Docker
       ansible.builtin.shell: |
@@ -57,7 +57,7 @@
         codename="$(lsb_release -cs)"
         echo "deb [arch=${arch} signed-by={{ docker_keyring }}] https://download.docker.com/linux/ubuntu ${codename} stable" > "{{ docker_list_path }}"
       args:
-        warn: false
+        executable: /bin/bash
 
     - name: Atualizar cache e instalar Docker CE
       ansible.builtin.shell: |
@@ -66,7 +66,7 @@
         apt-get update -y
         apt-get install -y docker-ce docker-ce-cli containerd.io
       args:
-        warn: false
+        executable: /bin/bash
 
     - name: Garantir grupo docker existe
       ansible.builtin.group:
@@ -92,7 +92,7 @@
           /usr/bin/python3.9 -m ensurepip --upgrade || curl -sS https://bootstrap.pypa.io/get-pip.py | /usr/bin/python3.9
         fi
       args:
-        warn: false
+        executable: /bin/bash
 
     - name: Instalar Docker SDK para Python (necessário para docker_container)
       ansible.builtin.shell: |
@@ -100,7 +100,7 @@
         /usr/bin/python3.9 -m pip install --upgrade pip
         /usr/bin/python3.9 -m pip install docker
       args:
-        warn: false
+        executable: /bin/bash
 
     - name: Executar container da aplicação Java
       community.docker.docker_container:
