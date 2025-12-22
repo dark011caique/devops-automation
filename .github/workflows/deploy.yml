@@ -96,8 +96,9 @@ jobs:
           echo "${{ env.PUBLIC_IP }} \
           ansible_user=${{ env.ADMIN_USERNAME }} \
           ansible_password=${{ secrets.ADMIN_PASSWORD }} \
-          ansible_python_interpreter=/usr/bin/python3.9 \
+          ansible_python_interpreter=/usr/bin/python3 \
           ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> inventory
+
 
 
       - name: Executar Playbook Ansible
