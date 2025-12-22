@@ -79,13 +79,11 @@ resource "azurerm_network_interface_security_group_association" "nsg_assoc" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
-
 resource "azurerm_linux_virtual_machine" "vm" {
   name                            = "vm-automation"
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = azurerm_resource_group.rg.location
   size                            = "Standard_B1s"
-
   admin_username                  = "azureuser"
   admin_password                  = var.admin_password
   disable_password_authentication = false
@@ -99,7 +97,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
     storage_account_type = "Standard_LRS"
   }
 
-  # --- AJUSTE CORRETO PARA UBUNTU 24.04 LTS ---
   source_image_reference {
     publisher = "Canonical"
     offer     = "ubuntu-24_04-lts"  # 24.04 LTS (Noble)
