@@ -13,6 +13,11 @@
           - lsb-release
         state: present
         update_cache: yes
+        
+    - name: Instalar Ansible compatível com Python 3.8
+      run: |
+        pip uninstall -y ansible ansible-core
+        pip install ansible-core==2.15.13
 
     - name: Adicionar chave GPG oficial do Docker
       apt_key:
